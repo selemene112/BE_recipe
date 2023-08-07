@@ -1,0 +1,36 @@
+// const CreateController = async (req, res) => {
+//   const userId = req.body;
+//   console.log(userId);
+//   const query = ` Create Data = ${JSON.stringify(userId)}`;
+//   const data = req.body;
+//   console.log(data);
+//   try {
+//     const cachedResult = await getCachedQueryResult(query);
+
+//     if (cachedResult) {
+//       res.status(200).json({
+//         status: 'success',
+//         Message: 'Data retrieved from cache',
+//         error: false,
+//         Data: cachedResult,
+//       });
+//     } else {
+//       const result = await UserModel.CreateUserModel(data);
+//       await cacheQueryResult(query, result);
+//       res.status(201).json({
+//         status: 'succes',
+//         Message: 'Your Create Data Success',
+//         error: false,
+//         Data: result,
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({
+//       status: status,
+//       Message: 'Error creating data',
+//       error: true,
+//       Data: null,
+//     });
+//   }
+// };
