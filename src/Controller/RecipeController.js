@@ -9,6 +9,7 @@ const { VertifikasiToken } = require('../middleware/VertifikasiToken');
 
 const CreateRecipeController = async (req, res) => {
   console.log('jwt');
+
   const jwt = req.payload;
   console.log(jwt);
   const cloudphotoProfil = await cloudinary.uploader.upload(req.file.path, { Folders: 'profil' });

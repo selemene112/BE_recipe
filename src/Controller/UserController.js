@@ -112,16 +112,37 @@ const LoginUserCOntroller = async (req, res) => {
 
 //=================== GET ALL DATA=====================================
 const GetAllController = async (req, res) => {
-  const data = await UserModel.GetAllModel();
-  const data1 = data.rows;
+  const userId = req.body;
+  const query = `${JSON.stringify(userId)}`;
+
   try {
-    res.status(200).json({
-      Status: 'Succes',
-      message: ' Your Data Succes',
-      error: false,
-      data: data1,
+    const cachedResult = await getCachedQueryResult(query);
+    if (cachedResult) {
+      res.status(200).json({
+        status: 'success',
+        Message: 'Data retrieved from cache',
+        error: false,
+        Data: cachedResult,
+      });
+    } else {
+      const data = await UserModel.GetAllModel();
+      const data1 = data.rows;
+      await cacheQueryResult(query, data);
+      res.status(200).json({
+        Status: 'Succes',
+        message: ' Your Data Succes',
+        error: false,
+        data: data1,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: status,
+      Message: 'Error creating data',
+      error: error.message,
+      Data: null,
     });
-  } catch (error) {}
+  }
 };
 
 //=================== GET BY ID=========================================
