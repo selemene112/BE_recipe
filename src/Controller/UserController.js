@@ -7,6 +7,7 @@ const { hashPassword, comparePassword } = require('../utility/bacyripts');
 const UserModel = require('../model/UserModel');
 const { cacheQueryResult, getCachedQueryResult } = require('../utility/queryManager');
 const secretKey = 'secretKey123';
+// let refreshToken;
 //=================CREATE DATA========================================
 const CreateController = async (req, res) => {
   const { password, email } = req.body;
@@ -98,7 +99,8 @@ const LoginUserCOntroller = async (req, res) => {
 
   //=================================================================================
 
-  const token1 = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+  const token1 = jwt.sign(payload, secretKey, { expiresIn: '100s' });
+  // refreshToken = jwt.sign(payload, secretKey);
 
   try {
     res.status(201).json({
@@ -107,7 +109,12 @@ const LoginUserCOntroller = async (req, res) => {
       error: false,
       data: token1,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({
+      status: 'Bad Request',
+      message: error.message,
+    });
+  }
 };
 
 //=================== GET ALL DATA=====================================

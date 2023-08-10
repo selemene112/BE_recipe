@@ -30,7 +30,6 @@ const VertifikasiToken = async (req, res, next) => {
     console.log('Inidecode');
     console.log(decoded);
     req.payload = decoded;
-    next();
   } catch (error) {
     // console.log(error);
     return res.status(401).json({

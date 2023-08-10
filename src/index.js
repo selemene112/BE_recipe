@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 
 const hutan = require('./route/UserRoute');
 const recipe = require('./route/Reciperoute');
+const Auth = require('./route/auth');
+
 app.use(cors());
 // app.use(express.json());
 app.use(express.json());
@@ -19,6 +21,8 @@ app.get('/api/v1/', (req, res) => {
 });
 
 app.use('/user', hutan);
+app.use('/Auth', Auth);
+
 app.use('/recipe', recipe);
 
 app.listen(3001, () => {
