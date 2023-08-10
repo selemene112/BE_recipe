@@ -21,7 +21,7 @@ const GetallRecipeModel = async () => {
   return pool.query(QueryGetall);
 };
 
-// ================================ Get Recipe by id ============================
+// ================================ Get Menu Build By Id User ============================
 
 const GetbyIdModel = async (user_id) => {
   const QueryGetbyID = 'SELECT * FROM recipe WHERE user_id = $1';
@@ -30,6 +30,14 @@ const GetbyIdModel = async (user_id) => {
   return pool.query(QueryGetbyID, Value);
 };
 
+//================================== Get Detail Menu By Id =======================================
+
+const GetDetailMenubyID = async (id) => {
+  const query = 'SELECT * FROM recipe WHERE id = $1';
+  const value = [id];
+
+  return pool.query(query, value);
+};
 // ================================= Update Recipe ===================================
 const UpdateRecipe = async (id, body) => {
   const result = await pool.query(
@@ -47,5 +55,6 @@ module.exports = {
   CreateRecipeModel,
   GetallRecipeModel,
   GetbyIdModel,
+  GetDetailMenubyID,
   UpdateRecipe,
 };

@@ -8,5 +8,6 @@ RouteRecipe.post('/', VertifikasiToken, upload.single('photo'), ControllerUser.C
 RouteRecipe.get('/', VertifikasiToken, ControllerUser.GetallController);
 RouteRecipe.get('/id/', VertifikasiToken, ControllerUser.GetbyID);
 RouteRecipe.put('/:id', VertifikasiToken, upload.single('photo'), ControllerUser.UpdateRecipe);
+RouteRecipe.get('/:id', VertifikasiToken, ControllerUser.DetailMenuController);
 
 module.exports = RouteRecipe;

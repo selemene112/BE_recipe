@@ -73,6 +73,29 @@ const GetbyID = async (req, res) => {
   }
 };
 
+// ================================= Get Detail Menu by id ========================
+
+const DetailMenuController = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const data = await recipeModel.GetDetailMenubyID(id);
+    res.status(200).json({
+      status: 'Succes',
+      Message: 'This Detail Menu',
+      error: false,
+      data: data.rows,
+    });
+  } catch (error) {
+    res.status(500).json({
+      Status: 'Faild',
+      Message: 'Your Server Bad',
+      error: error.message,
+      data: null,
+    });
+  }
+};
+
 //================================ Update recipe ================================
 const UpdateRecipe = async (req, res) => {
   const { id } = req.params;
@@ -112,6 +135,8 @@ const UpdateRecipe = async (req, res) => {
 module.exports = {
   CreateRecipeController,
   GetallController,
+  DetailMenuController,
+
   GetbyID,
   UpdateRecipe,
 };
