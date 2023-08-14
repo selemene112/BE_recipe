@@ -30,7 +30,7 @@ const CommentCOntroller = async (req, res) => {
       status: ' Succes ',
       message: ' Add Your Commentar Succes ',
       error: false,
-      data: comment,
+      writecom: comment,
     });
   } catch (error) {
     res.status(500).json({
@@ -52,7 +52,7 @@ const GetCOm = async (req, res) => {
       status: ' Succes ',
       message: ' This Your Comment  ',
       error: false,
-      data: data.rows[0],
+      comment: data.rows,
     });
   } catch (error) {
     res.status(500).json({

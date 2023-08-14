@@ -84,7 +84,7 @@ const DetailMenuController = async (req, res) => {
       status: 'Succes',
       Message: 'This Detail Menu',
       error: false,
-      data: data.rows,
+      data: data.rows[0],
     });
   } catch (error) {
     res.status(500).json({
