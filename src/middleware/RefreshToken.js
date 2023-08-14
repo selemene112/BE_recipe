@@ -5,8 +5,10 @@ const secretKey = 'secretKey123';
 const { VertifikasiToken } = require('./VertifikasiToken');
 
 const TokenRefresh = (req, res) => {
-  VertifikasiToken();
+  console.log('ini Refresh Token Bos');
   console.log('error');
+  const coba = req.payload;
+  console.log(coba);
   let token = {
     id: req.payload.id,
     nama: req.payload.nama,
@@ -20,7 +22,7 @@ const TokenRefresh = (req, res) => {
   try {
     res.status(201).json({
       status: 'Succes',
-      message: ' Login Succes',
+      message: ' Refresh Token Succes',
       error: false,
       data: token1,
     });
