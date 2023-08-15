@@ -10,5 +10,6 @@ route.get('/:id', VertifikasiToken, UserController.GetbyIDCOntroller);
 route.put('/:id', UserController.UpdateCOntroller);
 route.delete('/:id', UserController.DeleteUserController);
 route.post('/login/', UserController.LoginUserCOntroller);
+route.get('/users/navbar', VertifikasiToken, UserController.NavbarController);
 
 module.exports = route;

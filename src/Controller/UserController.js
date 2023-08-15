@@ -215,6 +215,33 @@ const DeleteUserController = async (req, res) => {
   }
 };
 
+//=================================== Navbar ===============================
+const NavbarController = async (req, res) => {
+  const payload = req.payload.id;
+  console.log('ini Payload dong');
+  console.log(payload);
+  let id = {
+    id: payload.id,
+  };
+  console.log(id);
+
+  try {
+    const data = await UserModel.GetbyidModel(payload);
+    res.status(200).json({
+      status: ' Succes',
+      message: ' This Your Profil',
+      error: false,
+      data: data.rows[0],
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: ' Faild',
+      message: ' Bad Server',
+      error: error.message,
+    });
+  }
+};
+
 //======================================= EXPORT=============================
 
 module.exports = {
@@ -224,4 +251,5 @@ module.exports = {
   GetbyIDCOntroller,
   UpdateCOntroller,
   DeleteUserController,
+  NavbarController,
 };
