@@ -171,13 +171,34 @@ const GetbyIDCOntroller = async (req, res) => {
 
 const UpdateCOntroller = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
-  const newData = req.body;
-  console.log(newData);
+  const { password, email } = req.body;
+  //===================== Vertifikasi Email===============================
+  let emailVertifikasi = await getUserByEmail(email);
+  if (emailVertifikasi.rows[0]) {
+    return res.status(409).json({
+      status: ' fail',
+      message: 'Email already exists.',
+      error: true,
+    });
+  }
+  //===========================================================================
+  let hash = await hashPassword(password);
+  req.body.password = hash;
+  console.log('photo====================');
+  console.log(req.file);
+  console.log('photo========================');
 
   try {
+    const cloudphotoProfil = await cloudinary.uploader.upload(req.file.path, { Folders: 'profil' });
+    const Profil = cloudphotoProfil.url;
+    let data1 = {
+      nama: req.body.nama,
+      email: req.body.email,
+      password: req.body.password,
+      profil: Profil,
+    };
     console.log('error');
-    const data = await UserModel.UpdateModel(id, newData);
+    const data = await UserModel.UpdateModel(id, data1);
 
     res.status(201).json({
       status: 'Succes',

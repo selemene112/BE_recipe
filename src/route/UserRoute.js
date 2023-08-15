@@ -7,7 +7,7 @@ const UserController = require('../Controller/UserController');
 route.post('/', upload.single('profil'), UserController.CreateController);
 route.get('/', VertifikasiToken, UserController.GetAllController);
 route.get('/:id', VertifikasiToken, UserController.GetbyIDCOntroller);
-route.put('/:id', UserController.UpdateCOntroller);
+route.put('/:id', VertifikasiToken, upload.single('profil'), UserController.UpdateCOntroller);
 route.delete('/:id', UserController.DeleteUserController);
 route.post('/login/', UserController.LoginUserCOntroller);
 route.get('/users/navbar', VertifikasiToken, UserController.NavbarController);
