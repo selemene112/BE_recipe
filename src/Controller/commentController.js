@@ -1,5 +1,6 @@
 const { CreateComment, GetbyidRecipe } = require('../model/coment');
 const { GetDetailMenubyID } = require('../model/RecipeModel');
+const { likedModel } = require('../model/like');
 
 //====================== COntroller Comment ======================================
 
@@ -42,7 +43,7 @@ const CommentCOntroller = async (req, res) => {
 };
 //================================= GET comment ==================================
 
-const GetCOm = async (req, res) => {
+const GetCOm = async (req, res, next) => {
   const { id } = req.params;
   console.log(id);
 
@@ -62,10 +63,39 @@ const GetCOm = async (req, res) => {
     });
   }
 };
+//============================== Liked ================================================
+
+const likedController = async (req, res, next) => {
+  const body = req.payload;
+
+  let data = {
+    liked: false,
+    nama: body.nama,
+    id_nama: body.id,
+  };
+
+  try {
+    if (!data.liked) {
+      data.liked = true;
+    } else {
+      data.liked = false;
+    }
+    console.log(data);
+
+    const like = await likedModel(data);
+    console.log('Like data:', like);
+
+    next(); // Jangan lupa memanggil next setelah selesai
+  } catch (error) {
+    console.error(error);
+    next(error); // Jika terjadi error, lemparkan ke error handler
+  }
+};
 
 //=========================== MODULE EXPORT
 
 module.exports = {
   CommentCOntroller,
   GetCOm,
+  likedController,
 };
