@@ -10,6 +10,14 @@ const likedModel = async (body) => {
   return result.rows[0];
 };
 
+const deleteLikeModel = async (id) => {
+  const queryDelete = ' DELETE FROM likes WHERE id = $1 ';
+  const Values = [1];
+
+  return pool.query(queryDelete, Values);
+};
+
 module.exports = {
   likedModel,
+  deleteLikeModel,
 };
