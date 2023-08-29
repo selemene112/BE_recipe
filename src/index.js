@@ -8,12 +8,11 @@ const hutan = require('./route/UserRoute');
 const recipe = require('./route/Reciperoute');
 const Auth = require('./route/auth');
 const comment = require('./route/comment');
+const like = require('./route/likeroute');
 
 app.use(cors());
-// app.use(express.json());
+
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
 
 app.get('/api/v1/', (req, res) => {
   res.status(200).json({
@@ -22,6 +21,7 @@ app.get('/api/v1/', (req, res) => {
 });
 
 app.use('/user', hutan);
+app.use('/like', like);
 app.use('/Auth', Auth);
 app.use('/com', comment);
 app.use('/recipe', recipe);

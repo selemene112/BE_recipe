@@ -2,7 +2,6 @@ const redisClient = require('../config/redis'); // Sesuaikan path jika diperluka
 
 // Fungsi untuk menyimpan hasil query ke cache Redis
 const cacheQueryResult = async (query, result) => {
-  // query = { yadi: query };
   console.log(typeof query);
   try {
     // Set data ke Redis dengan waktu kadaluarsa (misalnya, 1 jam)

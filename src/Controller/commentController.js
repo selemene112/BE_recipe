@@ -14,7 +14,7 @@ const CommentCOntroller = async (req, res) => {
   let jwt = req.payload;
   let body = req.body;
   console.log(jwt);
-  data = {
+  let data = {
     id_recipe: getbyidcontroller.rows[0].id,
     id_profil: jwt.id,
     nama: jwt.nama,

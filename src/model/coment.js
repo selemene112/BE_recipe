@@ -15,8 +15,8 @@ const CreateComment = async (body) => {
 // ======================== GET by idRecipe ===========================================
 
 const GetbyidRecipe = async (id_recipe) => {
-  queryGETcom = 'SELECT * FROM comment WHERE id_recipe = $1';
-  value = [id_recipe];
+  const queryGETcom = 'SELECT * FROM comment WHERE id_recipe = $1';
+  const value = [id_recipe];
 
   return pool.query(queryGETcom, value);
 };

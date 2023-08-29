@@ -51,9 +51,9 @@ const CreateController = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      status: status,
+      status: 'error',
       Message: 'Error creating data',
-      error: true,
+      error: error.message,
       Data: null,
     });
   }
@@ -76,7 +76,7 @@ const LoginUserCOntroller = async (req, res) => {
   //=============================================================================
   // console.log(emailVertifikasi);
   const passworddb = emailVertifikasi.rows[0].password;
-  // console.log(passworddb);
+
   let VertifikasiLogin = await comparePassword({ passReq: password, passData: passworddb });
   if (!VertifikasiLogin) {
     return res.status(401).json({
@@ -99,8 +99,7 @@ const LoginUserCOntroller = async (req, res) => {
 
   //=================================================================================
 
-  const token1 = jwt.sign(payload, secretKey, { expiresIn: '100s' });
-  // refreshToken = jwt.sign(payload, secretKey);
+  const token1 = jwt.sign(payload, secretKey, { expiresIn: '10000s' });
 
   try {
     res.status(201).json({
@@ -211,7 +210,7 @@ const UpdateCOntroller = async (req, res) => {
     res.status(500).json({
       status: status,
       message: 'Bad Server ',
-      message: error.message,
+      error: error.message,
     });
   }
 };
