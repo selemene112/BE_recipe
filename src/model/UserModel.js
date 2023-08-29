@@ -17,7 +17,7 @@ const CreateUserModel = async (body) => {
     res.status(500).json({
       status: status,
       message: 'Bad Server ',
-      message: error.message,
+      error: error.message,
     });
   }
 };
@@ -25,7 +25,7 @@ const CreateUserModel = async (body) => {
 
 const LoginUserModel = async (email, password) => {
   const LoginUserQuerySql = 'SELECT * FROM users WHERE email = $1 AND password = $2';
-  values = [email, password];
+  const values = [email, password];
 
   return pool.query(LoginUserQuerySql, values);
 };
@@ -43,7 +43,7 @@ const GetAllModel = async () => {
     res.status(500).json({
       status: status,
       message: 'Bad Server ',
-      message: error.message,
+      error: error.message,
     });
   }
 };
@@ -52,14 +52,14 @@ const GetAllModel = async () => {
 const GetbyidModel = async (id) => {
   try {
     const GetbyidQuery = 'SELECT * FROM users where id = $1';
-    value = [id];
+    const value = [id];
 
     return pool.query(GetbyidQuery, value);
   } catch (error) {
     res.status(500).json({
       status: status,
       message: 'Bad Server ',
-      message: error.message,
+      error: error.message,
     });
   }
 };
