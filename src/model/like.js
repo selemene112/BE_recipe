@@ -17,6 +17,13 @@ const deleteLikeModel = async (id_nama) => {
   return pool.query(queryDelete, Values);
 };
 
+const CountLike = async (id_recipe) => {
+  const QueryCountlike = ' SELECT COUNT(*) FROM likes WHERE id_recipe = $1 ';
+  let values = [id_recipe];
+
+  return pool.query(QueryCountlike, values);
+};
+
 const validasiLike = async (id_nama) => {
   const QueryValidas = 'SELECT id_nama FROM likes WHERE id_nama = $1';
   const Values = [id_nama];
@@ -28,4 +35,5 @@ module.exports = {
   likedModel,
   deleteLikeModel,
   validasiLike,
+  CountLike,
 };

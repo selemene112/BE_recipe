@@ -1,47 +1,46 @@
-const CreateController = async (req, res) => {
-  const userId = req.body;
-  console.log(userId);
-  const query = `${JSON.stringify(userId)}`;
-  const data = req.body;
-  console.log(data);
-  try {
-    const cachedResult = await getCachedQueryResult(query);
+// const CreateController = async (req, res) => {
+//   const userId = req.body;
+//   console.log(userId);
+//   const query = `${JSON.stringify(userId)}`;
+//   const data = req.body;
+//   console.log(data);
+//   try {
+//     const cachedResult = await getCachedQueryResult(query);
 
-    if (cachedResult) {
-      res.status(200).json({
-        status: 'success',
-        Message: 'Data retrieved from cache',
-        error: false,
-        Data: cachedResult,
-      });
-    } else {
-      const result = await UserModel.CreateUserModel(data);
-      await cacheQueryResult(query, result);
-      res.status(201).json({
-        status: 'succes',
-        Message: 'Your Create Data Success',
-        error: false,
-        Data: result,
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      status: status,
-      Message: 'Error creating data',
-      error: true,
-      Data: null,
-    });
-  }
-};
+//     if (cachedResult) {
+//       res.status(200).json({
+//         status: 'success',
+//         Message: 'Data retrieved from cache',
+//         error: false,
+//         Data: cachedResult,
+//       });
+//     } else {
+//       const result = await UserModel.CreateUserModel(data);
+//       await cacheQueryResult(query, result);
+//       res.status(201).json({
+//         status: 'succes',
+//         Message: 'Your Create Data Success',
+//         error: false,
+//         Data: result,
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({
+//       status: status,
+//       Message: 'Error creating data',
+//       error: true,
+//       Data: null,
+//     });
+//   }
+// };
 
-//=================================================
+// //=================================================
 
-
-"bcrypt": "^5.1.1",
-    "body-parser": "^1.20.2",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "gitignore": "^0.7.0",
-    "nodemon": "^3.0.1",
-    "pg": "^8.11.2"
+// "bcrypt": "^5.1.1",
+//     "body-parser": "^1.20.2",
+//     "dotenv": "^16.3.1",
+//     "express": "^4.18.2",
+//     "gitignore": "^0.7.0",
+//     "nodemon": "^3.0.1",
+//     "pg": "^8.11.2"
