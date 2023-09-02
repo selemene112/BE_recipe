@@ -5,6 +5,6 @@ const Routelike = express.Router();
 const { VertifikasiToken } = require('../middleware/VertifikasiToken');
 
 Routelike.post('/:id', VertifikasiToken, likeController);
-// Routelike.get('/CountLike/:id_recipe', VertifikasiToken, COuntLikeController);
+Routelike.get('/CountLike/:id_recipe', VertifikasiToken, COuntLikeController);
 
 module.exports = Routelike;

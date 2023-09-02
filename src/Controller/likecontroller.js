@@ -41,27 +41,27 @@ const likeController = async (req, res) => {
   }
 };
 
-// const COuntLikeController = async (req, res) => {
-//   const { id_recipe } = req.params;
+const COuntLikeController = async (req, res) => {
+  const { id_recipe } = req.params;
 
-//   try {
-//     const DataCount = await CountLike(id_recipe);
-//     res.status(200).json({
-//       message: 'Count Like',
-//       data: DataCount.rows[0].count,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({
-//       status: 'error',
-//       Message: 'Create Count Like error',
-//       error: true,
-//       Data: null,
-//     });
-//   }
-// };
+  try {
+    const DataCount = await CountLike(id_recipe);
+    res.status(200).json({
+      message: 'Count Like',
+      data: DataCount.rows[0].count,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'error',
+      Message: 'Create Count Like error',
+      error: true,
+      Data: null,
+    });
+  }
+};
 
 module.exports = {
   likeController,
-  // COuntLikeController,
+  COuntLikeController,
 };
