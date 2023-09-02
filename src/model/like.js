@@ -10,9 +10,9 @@ const likedModel = async (body) => {
   return result.rows[0];
 };
 
-const deleteLikeModel = async (id_nama) => {
-  const queryDelete = ' DELETE FROM likes WHERE id_nama = $1 ';
-  const Values = [id_nama];
+const deleteLikeModel = async (id_recipe, id_nama) => {
+  const queryDelete = ' DELETE FROM likes WHERE id_recipe = $1 AND id_nama = $2 ';
+  const Values = [id_recipe, id_nama];
 
   return pool.query(queryDelete, Values);
 };
@@ -24,9 +24,9 @@ const CountLike = async (id_recipe) => {
   return pool.query(QueryCountlike, values);
 };
 
-const validasiLike = async (id_nama) => {
-  const QueryValidas = 'SELECT id_nama FROM likes WHERE id_nama = $1';
-  const Values = [id_nama];
+const validasiLike = async (id_nama, id_recipe) => {
+  const QueryValidas = 'SELECT id_nama FROM likes WHERE id_nama = $1 AND id_recipe = $2';
+  const Values = [id_nama, id_recipe];
 
   return pool.query(QueryValidas, Values);
 };

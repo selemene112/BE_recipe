@@ -10,7 +10,10 @@ const likeController = async (req, res) => {
     nama: payload.nama,
     id_nama: payload.id,
   };
-  const Validasi = await validasiLike(likeTrue.id_nama);
+  const Validasi = await validasiLike(likeTrue.id_nama, id);
+  console.log(Validasi);
+  console.log('INI ERROR BOS');
+  console.log(likeTrue.id_nama, id);
 
   try {
     if (!Validasi.rows[0]) {
@@ -22,7 +25,9 @@ const likeController = async (req, res) => {
         data: DataCount.rows[0].count,
       });
     } else {
-      await deleteLikeModel(payload.id);
+      let data = await deleteLikeModel(id, likeTrue.id_nama);
+      console.log('INI SUDAH DI EXKSESUSU');
+      console.log(data);
       const DataCount = await CountLike(id);
       return res.status(201).json({
         status: 'succes',
