@@ -12,9 +12,10 @@ const Auth = require('./route/auth');
 const comment = require('./route/comment');
 const like = require('./route/likeroute');
 const { CreateComment } = require('./model/coment');
+const { init } = require('./config/WebSocket');
 
 //========================================== END Call ROute ================================================
-
+const http = require('http');
 app.use(cors());
 
 app.use(express.json());
@@ -22,19 +23,7 @@ app.use(express.json());
 //========================================== Web Socket Commentar ================================================
 
 const server = http.createServer(app);
-const io = socketIo(server);
-
-io.on('connection', (socket) => {
-  console.log('A user connected.');
-
-  socket.on('chat message', async (message) => {
-    const comment = await CreateComment(message);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('A user disconnected.');
-  });
-});
+init(server);
 
 //========================================== End Web Socket Commentar ================================================
 
@@ -50,6 +39,6 @@ app.use('/Auth', Auth);
 app.use('/com', comment);
 app.use('/recipe', recipe);
 
-app.listen(3001, () => {
+server.listen(3001, () => {
   console.log(`Server Running On Port '${'3001'}'`);
 });

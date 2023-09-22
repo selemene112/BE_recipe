@@ -1,4 +1,5 @@
 const { pool } = require('../config/db');
+const { getIO } = require('../config/WebSocket');
 
 //======================== Create Comment ========================================
 
@@ -9,7 +10,17 @@ const CreateComment = async (body) => {
         RETURNING id, id_recipe, id_profil, nama, commentar, created_at, updated_at  `,
     [body.id_recipe, body.id_profil, body.nama, body.commentar]
   );
-  return result.rows[0];
+  const comment = result.rows[0];
+
+  const io = getIO();
+
+  if (io) {
+    io.emit('new comment', comment);
+  } else {
+    console.error('Socket.IO is not properly initialized.');
+  }
+
+  return comment;
 };
 
 // ======================== GET by idRecipe ===========================================
