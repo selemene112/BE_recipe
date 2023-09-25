@@ -13,6 +13,7 @@ const comment = require('./route/comment');
 const like = require('./route/likeroute');
 const { CreateComment } = require('./model/coment');
 const { init } = require('./config/WebSocket');
+const Bookmark = require('./route/BookmarkRoute');
 
 //========================================== END Call ROute ================================================
 const http = require('http');
@@ -38,6 +39,7 @@ app.use('/like', like);
 app.use('/Auth', Auth);
 app.use('/com', comment);
 app.use('/recipe', recipe);
+app.use('/bookmark', Bookmark);
 
 server.listen(3001, () => {
   console.log(`Server Running On Port '${'3001'}'`);
