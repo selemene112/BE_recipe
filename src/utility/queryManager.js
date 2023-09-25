@@ -1,6 +1,5 @@
-const redisClient = require('../config/redis'); // Sesuaikan path jika diperlukan
+const redisClient = require('../config/redis');
 
-// Fungsi untuk menyimpan hasil query ke cache Redis
 const cacheQueryResult = async (query, result) => {
   console.log(typeof query);
   try {
@@ -11,18 +10,15 @@ const cacheQueryResult = async (query, result) => {
   }
 };
 
-// Fungsi untuk mendapatkan hasil query dari cache Redis
 const getCachedQueryResult = async (query) => {
   try {
-    // Dapatkan data dari Redis
     const cachedResult = await redisClient.get(query);
 
-    // Parse hasil yang didapatkan jika ada data dalam cache
     if (cachedResult) {
       return JSON.parse(cachedResult);
     }
 
-    return null; // Mengembalikan null jika data tidak ada dalam cache
+    return null;
   } catch (err) {
     console.error('Error getting cached query result:', err);
     return null;
