@@ -62,11 +62,15 @@ const GetbyID = async (req, res) => {
 
   try {
     const data = await recipeModel.GetbyIdModel(id);
+
+    const Counts = await recipeModel.CountRecipeModel(id);
+    console.log(Counts);
     res.status(200).json({
       status: 'succes',
       message: ' Your Recipe ',
       error: false,
       data: data.rows,
+      count: Counts.rowCount,
     });
   } catch (error) {
     console.log(error);

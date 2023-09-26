@@ -1,4 +1,4 @@
-const { AddBookmark, deleteBookmarkModel, validasiBookmark } = require('../model/BookmarkModel');
+const { AddBookmark, deleteBookmarkModel, validasiBookmark, getRecipesByBookmark } = require('../model/BookmarkModel');
 
 const BookmarkController = async (req, res) => {
   const { id } = req.params;
@@ -41,6 +41,30 @@ const BookmarkController = async (req, res) => {
   }
 };
 
+const getRecipesByBookmarkcontroller = async (req, res) => {
+  const payload = req.payload.id;
+
+  try {
+    const data = await getRecipesByBookmark(payload);
+    console.log(data);
+    res.status(200).json({
+      status: 'succes',
+      Message: 'Your Recipe',
+      error: false,
+      data: data,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'error',
+      Message: 'Error creating data',
+      error: true,
+      Data: null,
+    });
+  }
+};
+
 module.exports = {
   BookmarkController,
+  getRecipesByBookmarkcontroller,
 };

@@ -85,6 +85,8 @@ const DeleteUserModel = async (id) => {
 
   return pool.query(queryDeleteUser, value);
 };
+
+// ======================= Get Count ===============================
 //======================== EXPORT=====================
 
 module.exports = {

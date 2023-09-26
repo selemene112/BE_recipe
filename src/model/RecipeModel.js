@@ -49,6 +49,14 @@ const UpdateRecipe = async (id, body) => {
   );
   return result.rows[0];
 };
+
+// ================================= Get Count Recipe =================================
+
+const CountRecipeModel = async (id) => {
+  const query = 'SELECT count(*) as count FROM recipe WHERE id = $1';
+  const value = [id];
+  return pool.query(query, value);
+};
 //================================== EXPORT ===================================
 
 module.exports = {
@@ -57,4 +65,5 @@ module.exports = {
   GetbyIdModel,
   GetDetailMenubyID,
   UpdateRecipe,
+  CountRecipeModel,
 };
