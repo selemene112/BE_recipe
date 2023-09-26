@@ -4,7 +4,7 @@ let io;
 
 function init(server) {
   const corsOptions = {
-    origin: 'http://localhost:5173', // Ganti dengan asal yang sesuai
+    origin: 'http://localhost:5173',
     methods: ['GET', 'POST'],
   };
   io = socketIo(server, {
