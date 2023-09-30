@@ -5,10 +5,8 @@ const secretKey = 'secretKey123';
 const { VertifikasiToken } = require('./VertifikasiToken');
 
 const TokenRefresh = (req, res) => {
-  console.log('ini Refresh Token Bos');
-  console.log('error');
   const coba = req.payload;
-  console.log(coba);
+
   let token = {
     id: req.payload.id,
     nama: req.payload.nama,
@@ -16,8 +14,6 @@ const TokenRefresh = (req, res) => {
   };
 
   const token1 = jwt.sign(token, secretKey, { expiresIn: '100s' });
-  console.log('ini Token yang baru di generate');
-  console.log(token1);
 
   try {
     res.status(201).json({

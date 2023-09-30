@@ -14,7 +14,6 @@ const VertifikasiToken = async (req, res, next) => {
 
   const token = generateToken.split(' ')[1];
   const token1 = generateToken.split(' ');
-  console.log(token1);
 
   if (!token) {
     return res.status(401).json({
@@ -22,8 +21,6 @@ const VertifikasiToken = async (req, res, next) => {
       message: 'No token provided',
     });
   }
-  console.log('ini token ');
-  console.log(token);
 
   try {
     const decoded = jwt.verify(token, secretKey);

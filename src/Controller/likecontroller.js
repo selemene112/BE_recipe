@@ -1,4 +1,4 @@
-const { likedModel, deleteLikeModel, validasiLike, CountLike } = require('../model/like');
+const { likedModel, deleteLikeModel, validasiLike, CountLike, GetAllLikeRecipe, getRecipesByLikes } = require('../model/like');
 
 // ============================== Like and Unlike recipe =========================================
 
@@ -66,7 +66,33 @@ const COuntLikeController = async (req, res) => {
   }
 };
 
+const GetAllLikeRecipeController = async (req, res) => {
+  const { id } = req.payload;
+  console.log('error ini');
+  console.log(req.payload.id);
+  console.log('error ini');
+
+  try {
+    const DataCount = await getRecipesByLikes(id);
+    res.status(200).json({
+      status: 'succes',
+      message: 'Get All Like',
+
+      data: DataCount,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'error',
+      Message: 'Create Count Like error',
+      error: true,
+      Data: null,
+    });
+  }
+};
+
 module.exports = {
   likeController,
   COuntLikeController,
+  GetAllLikeRecipeController,
 };

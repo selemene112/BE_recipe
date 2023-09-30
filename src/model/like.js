@@ -31,9 +31,44 @@ const validasiLike = async (id_nama, id_recipe) => {
   return pool.query(QueryValidas, Values);
 };
 
+const GetAllLikeRecipe = async (id_nama) => {
+  const QueryGetAll = 'SELECT id_recipe FROM likes WHERE id_nama = $1';
+  const Values = [id_nama];
+  return pool.query(QueryGetAll, Values);
+};
+
+const getRecipesByLikes = async (id_nama) => {
+  try {
+    const query = `
+      SELECT
+          r.id AS recipe_id,
+          r.title AS recipe_title,
+          r.ingredients AS recipe_ingredients,
+          r.category AS recipe_category,
+          r.photo AS recipe_photo,
+          r.user_id AS recipe_user_id,
+          r.created_at AS recipe_created_at,
+          r.updated_at AS recipe_updated_at
+      FROM
+          recipe r
+      INNER JOIN
+          likes l ON r.id::VARCHAR = l.id_recipe
+      WHERE
+          l.id_nama = $1;
+    `;
+
+    const { rows } = await pool.query(query, [id_nama]);
+    return rows;
+  } catch (error) {
+    throw new Error(`Error getting recipes by likes: ${error.message}`);
+  }
+};
+
 module.exports = {
   likedModel,
   deleteLikeModel,
   validasiLike,
   CountLike,
+  GetAllLikeRecipe,
+  getRecipesByLikes,
 };
