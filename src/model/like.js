@@ -1,3 +1,4 @@
+const { getIO } = require('../config/WebSocket');
 const { pool } = require('../config/db');
 
 const likedModel = async (body) => {
@@ -7,14 +8,31 @@ const likedModel = async (body) => {
        RETURNING id, id_recipe, nama, id_nama, created_at, updated_at`,
     [body.id_recipe, body.nama, body.id_nama]
   );
-  return result.rows[0];
+
+  const like = result.rows[0];
+  const io = getIO();
+  if (io) {
+    io.emit('new like', like); // Emit new like
+  } else {
+    console.error('Socket.IO is not properly initialized.');
+  }
+  return like;
 };
 
 const deleteLikeModel = async (id_recipe, id_nama) => {
   const queryDelete = ' DELETE FROM likes WHERE id_recipe = $1 AND id_nama = $2 ';
   const Values = [id_recipe, id_nama];
 
-  return pool.query(queryDelete, Values);
+  const result = await pool.query(queryDelete, Values);
+
+  const io = getIO();
+  if (io) {
+    io.emit('delete like', { id_recipe, id_nama }); // Emit delete like
+  } else {
+    console.error('Socket.IO is not properly initialized.');
+  }
+
+  return result;
 };
 
 const CountLike = async (id_recipe) => {

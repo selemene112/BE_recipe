@@ -20,7 +20,7 @@ const likeController = async (req, res) => {
       await likedModel(likeTrue);
       const DataCount = await CountLike(id);
       return res.status(201).json({
-        status: 'succes',
+        status: 'Like',
         message: 'You Like This Product',
         data: DataCount.rows[0].count,
       });
@@ -30,7 +30,7 @@ const likeController = async (req, res) => {
       console.log(data);
       const DataCount = await CountLike(id);
       return res.status(201).json({
-        status: 'succes',
+        status: 'Unlike',
         message: 'You Unlike This Product',
         data: DataCount.rows[0].count,
       });
