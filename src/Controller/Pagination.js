@@ -35,6 +35,7 @@ const getDataDetail = async (req, res, next) => {
       pagination,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       status: 500,
       message: 'Failed to get data recipe',

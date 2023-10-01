@@ -2,16 +2,26 @@ const { pool } = require('../config/db');
 
 const getRecipe = async (data) => {
   const { search, searchBy, offset, limit } = data;
-  console.log('model getRecipe', search, searchBy, offset, limit);
   try {
-    const result = await pool.query(
-      `SELECT id, title, ingredients, photo, category
-      FROM recipe
-      WHERE ${searchBy} ILIKE $1
+    let query = `
+      SELECT
+          r.id,
+          r.title,
+          r.ingredients,
+          r.photo,
+          r.category,
+          u.nama AS user_name,
+          u.profil AS user_profile
+      FROM
+          recipe r
+      INNER JOIN
+          users u ON r.user_id = u.id::VARCHAR
+      WHERE
+          ${searchBy} ILIKE $1
       LIMIT $2
-      OFFSET $3`,
-      [`%${search}%`, limit, offset]
-    );
+      OFFSET $3`;
+
+    const result = await pool.query(query, [`%${search}%`, limit, offset]);
     return result.rows;
   } catch (err) {
     throw err;
