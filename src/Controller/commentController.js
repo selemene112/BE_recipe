@@ -1,4 +1,4 @@
-const { CreateComment, GetbyidRecipe } = require('../model/coment');
+const { CreateComment, GetbyidRecipe, getUserProfileAndCommentsByRecipeId } = require('../model/coment');
 const { GetDetailMenubyID } = require('../model/RecipeModel');
 const { likedModel } = require('../model/like');
 
@@ -48,7 +48,8 @@ const GetCOm = async (req, res, next) => {
   console.log(id);
 
   try {
-    const data = await GetbyidRecipe(id);
+    const data = await getUserProfileAndCommentsByRecipeId(id);
+    console.log(data);
     res.status(200).json({
       status: ' Succes ',
       message: ' This Your Comment  ',

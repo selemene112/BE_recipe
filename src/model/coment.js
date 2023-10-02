@@ -14,12 +14,6 @@ const CreateComment = async (body) => {
 
   const io = getIO();
 
-  if (io) {
-    io.emit('new comment', comment);
-  } else {
-    console.error('Socket.IO is not properly initialized.');
-  }
-
   return comment;
 };
 
@@ -32,7 +26,35 @@ const GetbyidRecipe = async (id_recipe) => {
   return pool.query(queryGETcom, value);
 };
 
+const getUserProfileAndCommentsByRecipeId = async (recipeId) => {
+  try {
+    const query = `
+      SELECT
+          u.profil AS user_profile,
+          c.id AS comment_id,
+          c.id_recipe,
+          c.id_profil,
+          c.nama,
+          c.commentar,
+          c.created_at,
+          c.updated_at
+      FROM
+          users u
+      INNER JOIN
+          comment c ON u.id = c.id_profil::UUID
+      WHERE
+          c.id_recipe = $1;
+    `;
+
+    const result = await pool.query(query, [recipeId]);
+    return result;
+  } catch (error) {
+    throw new Error(`Error getting user profile and comments by recipe_id: ${error.message}`);
+  }
+};
+
 module.exports = {
   CreateComment,
   GetbyidRecipe,
+  getUserProfileAndCommentsByRecipeId,
 };
