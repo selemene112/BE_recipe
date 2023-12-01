@@ -9,9 +9,41 @@
 where every user can like and comment on every existing recipe
 </p>
 </div>
-## Getting Started
 
-installing Project
+## Table of Contents
+
+- [Requirement](#requirement)
+- [Built With](#built-with)
+- [Installation](#installation)
+- [How use](#how-use)
+- [Related Project](#related-project)
+- [Contact](#contact)
+
+
+## Requirement
+
+Before you install this project on your local computer. You need:
+
+- **NodeJS**, I'm using **v18.16.0** when this docs is uploaded. You can download NodeJS in https://nodejs.org/en/download
+- **PostgreSQL**, I'm using **v15.3** when this docs is uploaded. You can download PostgreSQL in https://www.postgresql.org/download
+- **Postman**, I'm using **v10.18.8** when this docs is uploaded. You can download Postman in https://www.postman.com/downloads
+
+## Built with
+
+- [**argon2 0.31.2**](https://www.npmjs.com/package/argon2)
+- [**body-parser 1.20.2**](https://www.npmjs.com/package/body-parser)
+- [**cloudinary 1.40.0**](https://www.npmjs.com/package/cloudinary)
+- [**cors 2.8.5**](https://www.npmjs.com/package/cors)
+- [**dotenv 16.3.1**](https://www.npmjs.com/package/dotenv)
+- [**express 4.18.2**](https://www.npmjs.com/package/express)
+- [**helmet 7.0.0**](https://www.npmjs.com/package/helmet)
+- [**jsonwebtoken 9.0.1**](https://www.npmjs.com/package/jsonwebtoken)
+- [**morgan 1.10.0**](https://www.npmjs.com/package/morgan)
+- [**multer 1.4.5-lts.1**](https://www.npmjs.com/package/multer)
+- [**pg 8.11.3**](https://www.npmjs.com/package/pg)
+- [**xss-clean 0.1.4**](https://www.npmjs.com/package/xss-clean)
+
+## Installation
 
 ```bash
 npm i
@@ -47,9 +79,7 @@ There are several features contained in this project
 6. use Docker-Compose For redis                              
 ```
 
-## Dokumentasi 
-
-## Documentation
+## How Use
 
 Documentation files are provided in the [docs](./docs) folder
 
@@ -72,9 +102,13 @@ API endpoint list are also available as published postman documentation
 In the future, I plan to develop a project to handle payments so that they can be connected directly to the original banking system
 If you are interested in this project further, you can contact me on some of my social media
 
-Email: Ariyanda2107@gmail.com
+## Contact
 
-Linkedin: https://www.linkedin.com/in/muhammad-ariyanda-zulyadiansyah-18141426a/
+- Email : [`Ariyanda2107@gmail.com`](mailto:Ariyanda2107@gmail.com)
+
+- LinkedIn : [`https://www.linkedin.com/in/muhammad-ariyanda-zulyadiansyah-18141426a/`](https://www.linkedin.com/in/muhammad-ariyanda-zulyadiansyah-18141426a/)
+
+- GitHub : [`https://github.com/selemene112`](https://github.com/selemene112)
 
 
 
